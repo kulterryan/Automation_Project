@@ -1,5 +1,5 @@
 #!/bin/bash
-
+MYNAME="aryan"
 # Execute APT Update
 echo "Executing APT Update"
 #sudo apt update -y
@@ -23,6 +23,16 @@ RUNAPACHE=$(service apache2 status | grep "active (running)")
 if [[ $RUNAPACHE == "s" ]]; then
     echo "Apache2 is running"
 else
+    # Running Apache2 Service
     echo "Apache2 is not running"
     sudo systemctl start apache2
 fi
+
+# Timestamp
+TIMESTAMP=$(date '+%d%m%Y-%H%M%S')
+FILENAME="/tmp/${MYNAME}-httpd-logs-${TIMESTAMP}.tar"
+
+# Creating TAR File
+echo "Creating Apache2 Log Archives"
+
+tar -cf $(tar -cf ${FILENAME} $(find /var/log/apache2/ -name "*.log") 2>&1)
