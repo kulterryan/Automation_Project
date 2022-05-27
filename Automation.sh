@@ -19,15 +19,14 @@ INSTALLED=$(dpkg --get-selections apache2 | awk '{print $1}')
 # fi
 
 # Checking Apache System Status
-RUNAPACHE=$(systemctl status apache2 | grep "active (running)")
-echo $RUNAPACHE
-if $RUNAPACHE; then
+
+if systemctl status apache2 | grep "active (running)"; then
     echo "Apache2 is running"
 else
     # Running Apache2 Service
     echo "Apache2 is not running"
     echo "Starting Apache2 Server"
-    sudo systemctl start apache2
+    # sudo systemctl start apache2
     echo "Apache2 is started"
 fi
 
