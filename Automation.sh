@@ -20,7 +20,7 @@ fi
 
 # Checking Apache System Status
 RUNAPACHE=$(service apache2 status | grep "active (running)")
-
+echo $RUNAPACHE
 if [[ $RUNAPACHE == "s" ]]; then
     echo "Apache2 is running"
 else
