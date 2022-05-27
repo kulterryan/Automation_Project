@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# For Upgrad Assignment 1
+
 MYNAME="aryan"
 S3_BUCKET="upgrad-aryan"
 # Execute APT Update
