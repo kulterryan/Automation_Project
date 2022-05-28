@@ -59,7 +59,20 @@ else
     chmod o+w ${FILEPATH}
     #Creating File
     touch ${FILEPATH}/inventory.html
-    echo "<b>Log Type&ensp; &ensp; Date Created &ensp; &ensp; Type &ensp; &ensp; Size</b><br>" >> ${FILEPATH}/inventory.html
+    echo "<b>Log Type&ensp; &ensp; &ensp; Date Created &ensp; &ensp; &ensp; Type &ensp; &ensp; &ensp; Size</b><br>" >> ${FILEPATH}/inventory.html
 fi
 
 echo "httpd-logs &ensp; &ensp; ${TIMESTAMP} &ensp; &ensp; tar &ensp; &ensp; `du -h ${FILENAME} | awk '{print $1}'`" >> ${FILEPATH}/inventory.html
+
+
+# Cron Job
+CRONPATH="/etc/cron.d/"
+if [ -e ${CRONPATH}/automation ]; then
+    echo "Cron Job Exists"
+else
+    echo "Cron Job Does Not Exist"
+    echo "Creating Cron Job"
+    touch ${CRONPATH}/automation
+    echo "0 0 * * * root /root/Automation_Project/automation.sh" > ${CRONPATH}/automation
+    echo "Cron Job Added"
+fi
