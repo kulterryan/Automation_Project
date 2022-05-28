@@ -55,8 +55,11 @@ if [ -e ${FILEPATH}/inventory.html ]; then
 else
     echo "Inventory File Does Not Exist"
     echo "Creating New Inventory File"
+    # For Preventing Permission error
+    chmod o+w ${FILEPATH}
+    #Creating File
     touch ${FILEPATH}/inventory.html
-    echo "<b>Log Type&ensp; &ensp; Date Created &ensp; &ensp; Type &ensp; &ensp; Size</b><br>" >> $FILEPATH
+    echo "<b>Log Type&ensp; &ensp; Date Created &ensp; &ensp; Type &ensp; &ensp; Size</b><br>" >> ${FILEPATH}/inventory.html
 fi
 
-echo "httpd-logs &ensp; &ensp; ${TIMESTAMP} &ensp; &ensp; tar &ensp; &ensp; `du -h ${FILENAME} | awk '{print $1}'`" >> $FILEPATH
+echo "httpd-logs &ensp; &ensp; ${TIMESTAMP} &ensp; &ensp; tar &ensp; &ensp; `du -h ${FILENAME} | awk '{print $1}'`" >> ${FILEPATH}/inventory.html
