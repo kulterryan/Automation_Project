@@ -62,7 +62,7 @@ else
     echo "<b>Log Type&ensp; &ensp; &ensp; Date Created &ensp; &ensp; &ensp; Type &ensp; &ensp; &ensp; Size</b><br>" >> ${FILEPATH}/inventory.html
 fi
 
-echo "httpd-logs &ensp; &ensp; ${TIMESTAMP} &ensp; &ensp; tar &ensp; &ensp; `du -h ${FILENAME} | awk '{print $1}'`" >> ${FILEPATH}/inventory.html
+echo "<br>httpd-logs &ensp; &ensp; ${TIMESTAMP} &ensp; &ensp; tar &ensp; &ensp; `du -h ${FILENAME} | awk '{print $1}'`" >> ${FILEPATH}/inventory.html
 
 
 # Cron Job
