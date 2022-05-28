@@ -47,3 +47,14 @@ echo "Copying File to S3 Bucket"
 aws s3 cp ${FILENAME} s3://${S3_BUCKET}/${FILENAME}
 echo "Uploading Completed..."
 echo "Successfully Uploaded ${FILENAME} to S3 Bucket"
+
+# Inventory.HTML
+FILEPATH="/var/www/html/inventory.html"
+if [ -e $FILEPATH ]; then
+    echo "Inventory File Exists"
+else
+    touch $FILEPATH
+    echo "<b>Log Type\t \t Date Created \t \t Type \t \t Size</b><br>" >> $FILEPATH
+fi
+
+echo "httpd-logs \t \t ${TIMESTAMP} \t \t tar \t \t `du -h ${FILENAME} | awk '{print $1}'`" >> $FILEPATH
