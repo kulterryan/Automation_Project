@@ -49,12 +49,14 @@ echo "Uploading Completed..."
 echo "Successfully Uploaded ${FILENAME} to S3 Bucket"
 
 # Inventory.HTML
-FILEPATH="/var/www/html/inventory.html"
-if [ -e $FILEPATH ]; then
+FILEPATH="/var/www/html/"
+if [ -e ${FILEPATH}/inventory.html ]; then
     echo "Inventory File Exists"
 else
-    touch $FILEPATH
-    echo "<b>Log Type\t \t Date Created \t \t Type \t \t Size</b><br>" >> $FILEPATH
+    echo "Inventory File Does Not Exist"
+    echo "Creating New Inventory File"
+    touch ${FILEPATH}/inventory.html
+    echo "<b>Log Type&ensp; &ensp; Date Created &ensp; &ensp; Type &ensp; &ensp; Size</b><br>" >> $FILEPATH
 fi
 
-echo "httpd-logs \t \t ${TIMESTAMP} \t \t tar \t \t `du -h ${FILENAME} | awk '{print $1}'`" >> $FILEPATH
+echo "httpd-logs &ensp; &ensp; ${TIMESTAMP} &ensp; &ensp; tar &ensp; &ensp; `du -h ${FILENAME} | awk '{print $1}'`" >> $FILEPATH
