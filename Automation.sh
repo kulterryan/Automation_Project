@@ -47,3 +47,32 @@ echo "Copying File to S3 Bucket"
 aws s3 cp ${FILENAME} s3://${S3_BUCKET}/${FILENAME}
 echo "Uploading Completed..."
 echo "Successfully Uploaded ${FILENAME} to S3 Bucket"
+
+# Inventory.HTML
+FILEPATH="/var/www/html/"
+if [ -e ${FILEPATH}/inventory.html ]; then
+    echo "Inventory File Exists"
+else
+    echo "Inventory File Does Not Exist"
+    echo "Creating New Inventory File"
+    # For Preventing Permission error
+    chmod o+w ${FILEPATH}
+    #Creating File
+    touch ${FILEPATH}/inventory.html
+    echo "<b>Log Type&ensp; &ensp; &ensp; Date Created &ensp; &ensp; &ensp; Type &ensp; &ensp; &ensp; Size</b><br>" >> ${FILEPATH}/inventory.html
+fi
+
+echo "<br>httpd-logs &ensp; &ensp; ${TIMESTAMP} &ensp; &ensp; tar &ensp; &ensp; `du -h ${FILENAME} | awk '{print $1}'`" >> ${FILEPATH}/inventory.html
+
+
+# Cron Job
+CRONPATH="/etc/cron.d/"
+if [ -e ${CRONPATH}/automation ]; then
+    echo "Cron Job Exists"
+else
+    echo "Cron Job Does Not Exist"
+    echo "Creating Cron Job"
+    touch ${CRONPATH}/automation
+    echo "0 0 * * * root /root/Automation_Project/automation.sh" > ${CRONPATH}/automation
+    echo "Cron Job Added"
+fi
